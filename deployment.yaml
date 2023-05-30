@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Replace YOUR-NAME-DEP-gke by other name
+  name: final-project-danielv-dep-gke
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-danielvalenciaa
+  template:
+    metadata:
+      labels:
+        app: hello-danielvalenciaa
+    spec:
+      containers:
+      - name: hello-danielvalenciaa-app
+        # Replace YOUR-NAME-gke by the name used before
+        image: us-central1-docker.pkg.dev/ucaldas-cloud-computing/ucaldas-repo/final-project-danielv-gke:latest
+        ports:
+        - containerPort: 3000
+        env:
+          - name: PORT
+            value: "3000"

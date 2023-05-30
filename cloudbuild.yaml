@@ -1,0 +1,19 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t=us-central1-docker.pkg.dev/ucaldas-cloud-computing/ucaldas-repo/${_IMG_NAME}-gke:v${_IMG_VERS}
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t=us-central1-docker.pkg.dev/ucaldas-cloud-computing/ucaldas-repo/${_IMG_NAME}-gke:latest
+      - .
+substitutions:
+  _IMG_NAME: final-project-danielv
+  _IMG_VERS: "0.1"
+images:
+  # image tag is defined here since GCR appends `:latest` to your image tag by
+  # default and pushes the tag with latest
+  - gcr.io/ucaldas-cloud-computing/${_IMG_NAME}:v${_IMG_VERS}
+  - gcr.io/ucaldas-cloud-computing/${_IMG_NAME}:latest
